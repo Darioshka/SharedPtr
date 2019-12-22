@@ -73,8 +73,7 @@ public:
         if (count[reinterpret_cast<int64_t>(pointer)] == 0) {
             delete (pointer);
             count.erase(reinterpret_cast<int64_t>(pointer));
-        }
-        else {
+        } else {
             count[reinterpret_cast<int64_t>(pointer]--;
             pointer = nullptr;
         }
