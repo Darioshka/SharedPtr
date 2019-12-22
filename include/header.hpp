@@ -79,12 +79,12 @@ public:
         }
     }
     void reset(T* ptr){
-        if (count[reinterpret_cast<int64_t>(pointer)] == 1) {
+        if (count[reinterpret_cast<int64_t>(ptr)] == 1) {
             delete (pointer);
-            count[reinterpret_cast<int64_t>(pointer)] = 0;
-            count.erase(reinterpret_cast<int64_t>(pointer));
+            count[reinterpret_cast<int64_t>(ptr)] = 0;
+            count.erase(reinterpret_cast<int64_t>(ptr));
         } else {
-            count[reinterpret_cast<int64_t>(pointer)]--;
+            count[reinterpret_cast<int64_t>(ptr)]--;
             pointer = nullptr;
         }
     }
