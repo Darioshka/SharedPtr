@@ -77,7 +77,6 @@ public:
             count[reinterpret_cast<int64_t>(pointer]--;
             pointer = nullptr;
         }
-
     }
     void reset(T* ptr){
 		if (count[reinterpret_cast<int64_t>(pointer)] == 1) {
