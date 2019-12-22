@@ -7,11 +7,9 @@ TEST(Example, EmptyTest) {
     a[0] = 42;
     int*b = new int;
     b[0] = 20;
-	
     SharedPtr<int> link1(a);
     SharedPtr<int> link2(link1);
     SharedPtr<int> link3(b);
-    
     EXPECT_EQ(static_cast<int>(link1.get()[0]), 42);
     EXPECT_EQ(static_cast<int>(link2.get()[0]), 42);
     link1.swap(link3);
