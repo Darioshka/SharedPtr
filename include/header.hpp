@@ -5,6 +5,7 @@
 #include <iostream>
 #include <map>
 #include <stdint.h>
+#include <utility>
 
 using std::map;
 using std::int64_t;
@@ -22,10 +23,9 @@ public:
 
     explicit SharedPtr(T* ptr){
         pointer = ptr;
-        if (count.find(reinterpret_cast<int64_t>(pointer))!=count.end() ) {
+        if (count.find(reinterpret_cast<int64_t>(pointer)) != count.end()) {
             count[reinterpret_cast<int64_t>(pointer)]++;
-        }
-        else {
+        } else {
             count.insert({reinterpret_cast<int64_t>(pointer), 1});
         }
     }
@@ -46,7 +46,6 @@ public:
             count.erase(reinterpret_cast<int64_t>(pointer));
             delete pointer;
         }
-
     }
 
     auto operator=(const SharedPtr& r) -> SharedPtr&;
@@ -56,8 +55,7 @@ public:
     explicit operator bool() const{
         if (!pointer){
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -83,8 +81,16 @@ public:
 
     }
     void reset(T* ptr){
-
+		if (count[reinterpret_cast<int64_t>(pointer)] == 1) {
+            delete (pointer);
+            count[reinterpret_cast<int64_t>(pointer)] = 0;
+            count.erase(reinterpret_cast<int64_t>(pointer));
+        } else {
+            count[reinterpret_cast<int64_t>(pointer)]--;
+            pointer = nullptr;
+        }
     }
+	
     void swap(SharedPtr& r){
         T* tmp;
         tmp = r.pointer;
