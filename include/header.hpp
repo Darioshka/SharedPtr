@@ -74,7 +74,7 @@ public:
             delete (pointer);
             count.erase(reinterpret_cast<int64_t>(pointer));
         } else {
-            count[reinterpret_cast<int64_t>(pointer]--;
+            count[reinterpret_cast<int64_t>(pointer)]--;
             pointer = nullptr;
         }
     }
@@ -88,14 +88,12 @@ public:
             pointer = nullptr;
         }
     }
-	
     void swap(SharedPtr& r){
         T* tmp;
         tmp = r.pointer;
         r.pointer = pointer;
         pointer = tmp;
     }
-
     auto use_count() const -> size_t{
         return count[reinterpret_cast<int64_t>(pointer)];
     }
